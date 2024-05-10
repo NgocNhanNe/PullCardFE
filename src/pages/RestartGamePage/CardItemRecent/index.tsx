@@ -1,10 +1,19 @@
 /* eslint-disable jsx-a11y/img-redundant-alt */
 import classNames from 'classnames/bind';
 import style from './CardItemRecent.module.scss';
+import { CardResponse } from 'types/CardResponse.type';
+import { MdOutlineNavigateNext } from 'react-icons/md';
 
 const cx = classNames.bind(style);
 
-const CardItemRecent = () => {
+type CardItemRecentProps = {
+  cardItem: CardResponse;
+  onCardItemClick: (cardItemSelected: CardResponse) => void;
+};
+
+const CardItemRecent = ({ cardItem, onCardItemClick }: CardItemRecentProps) => {
+  if (!cardItem) return null;
+
   return (
     <div
       className={cx(
@@ -14,12 +23,19 @@ const CardItemRecent = () => {
     >
       <img
         className={cx('card-image')}
-        src='https://deckofcardsapi.com/static/img/9C.png'
+        src={cardItem.cards[0].image}
         alt='profile image'
       />
       <div className={cx('card-infor')}>
-        <p className={cx('name')}>Ngoc nhan</p>
-        <p className={cx('role')}>Free account</p>
+        <div className='d-flex justify-content-between align-items-center'>
+          <p className={cx('name')}>{cardItem.cards[0].code}</p>
+          <MdOutlineNavigateNext
+            size={25}
+            className='cursor-pointer'
+            onClick={() => onCardItemClick(cardItem)}
+          />
+        </div>
+        <p className={cx('role')}>{cardItem.timestamp}</p>
       </div>
     </div>
   );

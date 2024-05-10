@@ -3,7 +3,7 @@ import { menuList } from './menu';
 import className from 'classnames/bind';
 import styles from './Sidebar.module.scss';
 import logo from '../../../assets/images/logo.png';
-import { Button, Row } from 'reactstrap';
+import { Row } from 'reactstrap';
 import { Link } from 'react-router-dom';
 import AccountProfile from 'components/AccountProfile';
 
@@ -26,8 +26,11 @@ const Sidebar = () => {
       </Row>
 
       {menuList.map(item => (
-        <Row className='d-flex justify-content-center w-75'>
-          <span>Admin tools</span>
+        <Row
+          key={item.path}
+          className='d-flex justify-content-center w-75'
+        >
+          <span className={cx('heading-menu-item')}>Admin tools</span>
 
           <div
             className={cx(

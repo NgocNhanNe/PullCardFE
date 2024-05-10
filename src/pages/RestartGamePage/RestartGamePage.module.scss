@@ -12,9 +12,9 @@
   height: 379px;
   perspective: 1000px;
 
-  &:hover .flip-card-inner {
-    transform: rotateY(180deg);
-  }
+  // &:hover .flip-card-inner {
+  //   transform: rotateY(180deg);
+  // }
 
   .flip-card-inner {
     position: relative;
