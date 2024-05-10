@@ -1,0 +1,24 @@
+.profile-container {
+  & .profile-image {
+    width: 45px;
+    height: 45px;
+    border: 1px solid gray;
+    border-radius: 999px;
+    margin-right: 10px;
+  }
+
+  & .profile-infor {
+    padding: 0px;
+
+    .name {
+      margin-bottom: 0px;
+    }
+
+    .role {
+      color: #808191 !important;
+      font-size: 13px;
+      font-family: 'Inter';
+      font-weight: 600;
+    }
+  }
+}

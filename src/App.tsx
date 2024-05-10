@@ -1,7 +1,9 @@
 import { Route, Routes } from 'react-router-dom';
 
-import './App.css';
 import { RouteType, privateRoutes, publicRoutes } from './routes';
+import 'bootstrap-scss/bootstrap.scss';
+
+import * as React from 'react';
 
 const getRoutes = (routes: RouteType[]) => {
   return routes.map(route => {

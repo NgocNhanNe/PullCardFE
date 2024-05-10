@@ -15,5 +15,6 @@ export const publicRoutes: RouteType[] = [
 ];
 
 export const privateRoutes: RouteType[] = [
-  { path: '/restart-game', page: RestartGamePage, layout: MainLayout }
+  { path: '/restart-game', page: RestartGamePage, layout: MainLayout },
+  { path: '/', page: RestartGamePage, layout: MainLayout }
 ];

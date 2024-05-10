@@ -1,0 +1,77 @@
+.restart-container {
+  width: 100%;
+}
+
+.flip-card-container {
+  border-right: 1px solid rgb(238, 238, 238);
+}
+
+.flip-card {
+  background-color: transparent;
+  width: 300px;
+  height: 379px;
+  perspective: 1000px;
+
+  &:hover .flip-card-inner {
+    transform: rotateY(180deg);
+  }
+
+  .flip-card-inner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    transition: transform 0.6s;
+    transform-style: preserve-3d;
+
+    .flip-card-front,
+    .flip-card-back {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      -webkit-backface-visibility: hidden;
+      backface-visibility: hidden;
+    }
+
+    .flip-card-front {
+      background: url('../../assets/images/cardBack.png');
+      background-repeat: no-repeat;
+      background-size: cover;
+      color: white;
+      transform: rotateY(180deg);
+    }
+
+    .flip-card-back {
+      color: black;
+    }
+  }
+}
+
+.choose-btn {
+  background-color: black;
+  color: white;
+  width: 250px;
+  height: 55px;
+  border-radius: 15px;
+}
+
+.flip-card-recent {
+  position: relative;
+  .flip-card-recent-list {
+    padding-bottom: 10px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: 10px;
+    box-shadow: 8px 10px 11px 2px rgba(227, 230, 236, 0.91);
+    width: 55%;
+
+    .flip-card-recent-title {
+      margin-left: 40px;
+      font-family: 'Poppins';
+      font-weight: 500;
+      font-size: 18px;
+    }
+  }
+}
