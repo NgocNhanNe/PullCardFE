@@ -1,10 +1,9 @@
+import 'bootstrap-scss/bootstrap.scss';
+import { useState } from 'react';
 import { Route, Routes } from 'react-router-dom';
 
-import { RouteType, privateRoutes, publicRoutes } from './routes';
-import 'bootstrap-scss/bootstrap.scss';
-
+import { RouteType, privateRoutes } from './routes';
 import { CardSelectedContext, LastCardsContext } from 'contexts';
-import { useState } from 'react';
 
 const getRoutes = (routes: RouteType[]) => {
   return routes.map(route => {
@@ -37,10 +36,7 @@ const App = () => {
   return (
     <CardSelectedContext.Provider value={{ cardSelected, setCardSelected }}>
       <LastCardsContext.Provider value={{ lastCards, setLastCards }}>
-        <Routes>
-          {getRoutes(publicRoutes)}
-          {getRoutes(privateRoutes)}
-        </Routes>
+        <Routes>{getRoutes(privateRoutes)}</Routes>
       </LastCardsContext.Provider>
     </CardSelectedContext.Provider>
   );

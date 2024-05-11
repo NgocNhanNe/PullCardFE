@@ -1,15 +1,19 @@
 import * as React from 'react';
-import empty from '../../assets/images/empty.png';
+import classNames from 'classnames/bind';
 
+import empty from '../../assets/images/empty.png';
+import styles from './NoLastCardResponse.module.scss';
+
+const cx = classNames.bind(styles);
 const NoLastCardResponse = () => {
   return (
-    <div style={{ background: 'none', padding: '24px 0', textAlign: 'center' }}>
+    <div className={cx('no-reponse-container')}>
       <img
         style={{ width: '120px' }}
         src={empty}
         alt='empty'
       />
-      <p style={{ color: '#AAA', fontWeight: 300, fontSize: '12px' }}>Available</p>
+      <p>Available</p>
     </div>
   );
 };

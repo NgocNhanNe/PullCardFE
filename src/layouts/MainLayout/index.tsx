@@ -1,6 +1,6 @@
-import * as React from 'react';
-import { ReactNode } from 'react';
 import className from 'classnames/bind';
+import { ReactNode } from 'react';
+
 import styles from './MainLayout.module.scss';
 import Sidebar from './Sidebar';
 

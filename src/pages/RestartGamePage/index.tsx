@@ -1,29 +1,27 @@
-import { useRef, useEffect, useState, useContext } from 'react';
+import axios from 'axios';
+import classNames from 'classnames/bind';
 import { Col } from 'reactstrap';
+import { useRef, useEffect, useState, useContext } from 'react';
 
 import style from './RestartGamePage.module.scss';
-
-import classNames from 'classnames/bind';
-import axios from 'axios';
-
 import cardBack from '../../assets/images/cardBack.png';
 import CardItemRecent from './CardItemRecent';
+import NoLastCardResponse from 'components/NoLastCardResponse';
 import { CardDeck } from 'types/CardDeck.type';
 import { CardResponse } from 'types/CardResponse.type';
-import { CardSelectedContext, CurrentAccountContext, LastCardsContext } from 'contexts';
-import NoLastCardResponse from 'components/NoLastCardResponse';
 import { handleTitleCase } from 'utils';
+import { CardSelectedContext, CurrentAccountContext, LastCardsContext } from 'contexts';
 
 const cx = classNames.bind(style);
 
 const RestartGamePage = () => {
   const currentUser = useContext(CurrentAccountContext);
+  const { lastCards, setLastCards } = useContext(LastCardsContext);
   const { cardSelected: currentCard, setCardSelected: setCurrentCard } =
     useContext(CardSelectedContext);
-  const { lastCards, setLastCards } = useContext(LastCardsContext);
   const [loading, setLoading] = useState(false);
-
   const [cardDeck, setCardDeck] = useState<CardDeck | null>(null);
+
   const innerCardRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -32,8 +30,6 @@ const RestartGamePage = () => {
       .get('https://deckofcardsapi.com/api/deck/new/shuffle/?deck_count=1')
       .then(res => {
         if (res.status === 200) {
-          setLoading(true);
-
           setCardDeck(res.data);
         }
       })
@@ -99,12 +95,6 @@ const RestartGamePage = () => {
     localStorage.setItem('cardSelected', JSON.stringify(cardItemSelected));
     setCurrentCard(cardItemSelected);
   };
-
-  console.log(
-    lastCards.map(i => {
-      return i.timestamp;
-    })
-  );
 
   return (
     <div className={cx('restart-container', 'd-flex')}>

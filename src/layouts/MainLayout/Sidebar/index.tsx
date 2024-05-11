@@ -1,18 +1,18 @@
-import { menuList } from './menu';
 import className from 'classnames/bind';
-import styles from './Sidebar.module.scss';
-import logo from '../../../assets/images/logo.png';
 import { Row } from 'reactstrap';
 import { Link } from 'react-router-dom';
-import AccountProfile from 'components/AccountProfile';
 import { useContext } from 'react';
+
+import logo from '../../../assets/images/logo.png';
+import styles from './Sidebar.module.scss';
+import AccountProfile from 'components/AccountProfile';
+import { menuList } from './menu';
 import { CardSelectedContext, LastCardsContext } from 'contexts';
 
 const cx = className.bind(styles);
-
 const Sidebar = () => {
-  const { setCardSelected } = useContext(CardSelectedContext);
   const { setLastCards } = useContext(LastCardsContext);
+  const { setCardSelected } = useContext(CardSelectedContext);
 
   return (
     <div
@@ -60,6 +60,7 @@ const Sidebar = () => {
           </div>
         </Row>
       ))}
+
       <div className={cx('profile-container')}>
         <div className={cx('profile')}>
           <AccountProfile />

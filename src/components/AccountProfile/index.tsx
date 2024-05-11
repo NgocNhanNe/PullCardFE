@@ -1,13 +1,13 @@
 /* eslint-disable jsx-a11y/img-redundant-alt */
-import { CurrentAccountContext } from 'contexts';
-import avatarImg from '../../assets/images/avatar.png';
-import style from './AccountProfile.module.scss';
 import classNames from 'classnames/bind';
 import { useContext } from 'react';
+
+import styles from './AccountProfile.module.scss';
+import avatarImg from '../../assets/images/avatar.png';
 import { handleTitleCase } from 'utils';
+import { CurrentAccountContext } from 'contexts';
 
-const cx = classNames.bind(style);
-
+const cx = classNames.bind(styles);
 const AccountProfile = () => {
   const currentAccount = useContext(CurrentAccountContext);
 

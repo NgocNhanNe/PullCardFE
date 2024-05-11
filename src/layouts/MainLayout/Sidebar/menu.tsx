@@ -1,6 +1,6 @@
+import * as React from 'react';
 import { ReactNode } from 'react';
 import iconRestart from '../../../assets/images/iconRestart.png';
-import * as React from 'react';
 
 type MenuItem = {
   icon: ReactNode;
