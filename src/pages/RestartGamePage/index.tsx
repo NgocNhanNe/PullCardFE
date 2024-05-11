@@ -102,10 +102,6 @@ const RestartGamePage = () => {
     setCurrentCard(cardItemSelected);
   };
 
-  console.log('current', currentCard);
-  console.log('last', lastCards);
-  console.log('remain', currentCard?.remaining);
-
   return (
     <div className={cx('restart-container', 'd-flex')}>
       <Col
