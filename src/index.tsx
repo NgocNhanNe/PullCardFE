@@ -1,17 +1,18 @@
-import App from './App';
-import { BrowserRouter } from 'react-router-dom';
-import * as ReactDOM from 'react-dom/client';
 import * as React from 'react';
+import * as ReactDOM from 'react-dom/client';
+import { BrowserRouter } from 'react-router-dom';
+
+import App from './App';
+import avatarImg from '../src/assets/images/avatar.png';
 import GlobalStyle from './components/GlobalStyle';
 import { Account, CurrentAccountContext } from 'contexts';
-import avatarImg from '../src/assets/images/avatar.png';
 
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement);
 
 const currentAccountData: Account = {
   avatar: avatarImg,
   name: 'chloe',
-  role: 'Free account'
+  role: 'Developer'
 };
 
 root.render(
