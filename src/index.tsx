@@ -11,7 +11,7 @@ const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement)
 
 const currentAccountData: Account = {
   avatar: avatarImg,
-  name: 'chloe',
+  name: 'chloe nguyen',
   role: 'Developer'
 };
 

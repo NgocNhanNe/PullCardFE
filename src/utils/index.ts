@@ -1,3 +1,5 @@
 export const handleTitleCase = (name: string) => {
-  return name[0].toUpperCase() + name.slice(1).toLowerCase();
+  return name.toLowerCase().replace(/(?:^|\s)\w/g, function (match) {
+    return match.toUpperCase();
+  });
 };
