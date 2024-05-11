@@ -5,6 +5,7 @@ import style from './AccountProfile.module.scss';
 
 import classNames from 'classnames/bind';
 import { useContext } from 'react';
+import { handleTitleCase } from 'utils';
 
 const cx = classNames.bind(style);
 
@@ -25,7 +26,7 @@ const AccountProfile = () => {
           alt='profile image'
         />
         <div className={cx('profile-infor')}>
-          <p className={cx('name')}>{currentAccount?.name}</p>
+          <p className={cx('name')}>{handleTitleCase(currentAccount?.name!)}</p>
           <p className={cx('role')}>{currentAccount?.role}</p>
         </div>
       </div>

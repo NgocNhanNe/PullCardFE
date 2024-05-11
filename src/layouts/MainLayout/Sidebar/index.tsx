@@ -19,7 +19,7 @@ const Sidebar = () => {
       style={{ borderRight: '1px solid #eee' }}
       className='d-flex align-items-center justity-content-center flex-column vh-100'
     >
-      <Row style={{ padding: '65px 45px' }}>
+      <Row className={cx('logo')}>
         <Link to={'/restart-game'}>
           {' '}
           <img
@@ -32,21 +32,21 @@ const Sidebar = () => {
       {menuList.map(item => (
         <Row
           key={item.path}
-          className='d-flex justify-content-center w-75'
+          className={cx('menu-item-container', 'd-flex justify-content-center ')}
         >
           <span className={cx('heading-menu-item')}>Admin tools</span>
 
           <div
             className={cx(
               'menu-item',
-              'd-flex justify-content-center align-items-center p-4'
+              'd-flex justify-content-center align-items-center '
             )}
           >
             <div className='d-flex justify-content-center align-items-center'>
-              <div className='me-4'>{item.icon}</div>
+              <div className={cx('item-icon')}>{item.icon}</div>
               <Link
                 to={item.path}
-                className='text-light'
+                className='text-light ps-4'
                 onClick={() => {
                   setCardSelected(null);
                   setLastCards([]);

@@ -23,3 +23,48 @@
     }
   }
 }
+@media only screen and (max-width: 1124px) {
+  .profile-container {
+    position: relative;
+    cursor: pointer;
+
+    & .profile-infor {
+      display: none;
+      position: absolute;
+      margin-right: -200px;
+      text-align: center;
+      border: 1px solid var(--primary);
+      padding: 10px;
+      background-color: white;
+      color: var(--primary);
+      border-radius: 10px;
+
+      .role {
+        color: var(--primary) !important;
+        font-weight: normal;
+      }
+    }
+    &:hover .profile-infor {
+      display: block;
+      animation: slideIn 1s ease forwards;
+    }
+
+    & .profile-image {
+      margin-right: 0;
+    }
+  }
+
+  @keyframes slideIn {
+    from {
+      margin-right: -170px;
+      opacity: 0;
+    }
+    to {
+      margin-right: -170px;
+      opacity: 1;
+    }
+  }
+  .profile-infor {
+    display: none;
+  }
+}

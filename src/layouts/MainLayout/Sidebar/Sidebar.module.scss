@@ -16,15 +16,70 @@
   background-color: var(--primary);
   border: none;
   border-radius: 13px;
+  padding: 16px;
 }
 
 .profile-container {
   width: 16.6%;
   height: 100px;
   position: absolute;
-  top: 90.3%;
+  bottom: 3.3%;
   border-top: 2px solid #f3f3f3;
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+.menu-item-container {
+  width: 75%;
+}
+
+.logo {
+  padding: 65px 45px;
+}
+
+@media screen and (max-width: 1260px) {
+  .menu-item {
+    padding: 10px;
+    display: flex;
+    padding-right: 0;
+    & a {
+      font-size: 15px;
+      margin-right: 23px;
+    }
+    & img {
+      display: none;
+    }
+  }
+}
+
+@media only screen and (max-width: 1124px) {
+  .logo {
+    padding: 55px 45px;
+    & img {
+      content: url('../../../assets/images/logoResponsive.png');
+      width: 40px;
+    }
+  }
+  .item-icon {
+    margin-right: 0;
+  }
+
+  .menu-item {
+    padding: 7px;
+
+    & a {
+      display: none;
+    }
+    & img {
+      display: flex;
+      width: 30px;
+      height: 30px;
+    }
+  }
+  .profile-container {
+    width: 15%;
+    height: 100px;
+    bottom: 2%;
+  }
 }

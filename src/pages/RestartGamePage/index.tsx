@@ -12,6 +12,7 @@ import { CardDeck } from 'types/CardDeck.type';
 import { CardResponse } from 'types/CardResponse.type';
 import { CardSelectedContext, CurrentAccountContext, LastCardsContext } from 'contexts';
 import NoLastCardResponse from 'components/NoLastCardResponse';
+import { handleTitleCase } from 'utils';
 
 const cx = classNames.bind(style);
 
@@ -24,10 +25,6 @@ const RestartGamePage = () => {
 
   const [cardDeck, setCardDeck] = useState<CardDeck | null>(null);
   const innerCardRef = useRef<HTMLDivElement>(null);
-
-  console.log('last');
-
-  console.log(lastCards);
 
   useEffect(() => {
     setLoading(true);
@@ -108,10 +105,6 @@ const RestartGamePage = () => {
       return i.timestamp;
     })
   );
-
-  const handleTitleCase = (name: string) => {
-    return name[0].toUpperCase() + name.slice(1).toLowerCase();
-  };
 
   return (
     <div className={cx('restart-container', 'd-flex')}>
