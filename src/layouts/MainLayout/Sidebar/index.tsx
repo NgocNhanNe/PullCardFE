@@ -41,18 +41,18 @@ const Sidebar = () => {
               'menu-item',
               'd-flex justify-content-center align-items-center '
             )}
+            onClick={() => {
+              setCardSelected(null);
+              setLastCards([]);
+
+              localStorage.clear();
+            }}
           >
             <div className='d-flex justify-content-center align-items-center'>
               <div className={cx('item-icon')}>{item.icon}</div>
               <Link
                 to={item.path}
                 className='text-light ps-4'
-                onClick={() => {
-                  setCardSelected(null);
-                  setLastCards([]);
-
-                  localStorage.clear();
-                }}
               >
                 {item.title}
               </Link>

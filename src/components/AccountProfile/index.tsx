@@ -1,8 +1,7 @@
 /* eslint-disable jsx-a11y/img-redundant-alt */
 import { CurrentAccountContext } from 'contexts';
-import profileIcon from '../../assets/images/logo.png';
+import avatarImg from '../../assets/images/avatar.png';
 import style from './AccountProfile.module.scss';
-
 import classNames from 'classnames/bind';
 import { useContext } from 'react';
 import { handleTitleCase } from 'utils';
@@ -22,7 +21,7 @@ const AccountProfile = () => {
       >
         <img
           className={cx('profile-image')}
-          src={profileIcon}
+          src={avatarImg}
           alt='profile image'
         />
         <div className={cx('profile-infor')}>

@@ -4,7 +4,7 @@ import * as ReactDOM from 'react-dom/client';
 import * as React from 'react';
 import GlobalStyle from './components/GlobalStyle';
 import { Account, CurrentAccountContext } from 'contexts';
-import avatarImg from '../src/assets/images/logo.png';
+import avatarImg from '../src/assets/images/avatar.png';
 
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement);
 

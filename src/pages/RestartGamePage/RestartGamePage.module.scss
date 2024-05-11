@@ -35,11 +35,7 @@
   background-color: transparent;
   width: 300px;
   height: 379px;
-  perspective: 1000px;
-
-  // &:hover .flip-card-inner {
-  //   transform: rotateY(180deg);
-  // }
+  perspective: 400px;
 
   .flip-card-inner {
     position: relative;
@@ -100,6 +96,16 @@
       font-family: 'Poppins';
       font-weight: 500;
       font-size: 18px;
+    }
+  }
+}
+
+@media screen and (max-width: 1260px) {
+  .flip-card-recent {
+    width: 29.6%;
+    position: relative;
+    .flip-card-recent-list {
+      width: 72%;
     }
   }
 }

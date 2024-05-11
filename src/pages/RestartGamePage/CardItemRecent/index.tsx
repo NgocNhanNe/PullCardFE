@@ -31,7 +31,6 @@ const CardItemRecent = ({ cardItem, onCardItemClick }: CardItemRecentProps) => {
           <p className={cx('name')}>{cardItem.cards[0].code}</p>
           <MdOutlineNavigateNext
             size={25}
-            className='cursor-pointer'
             onClick={() => onCardItemClick(cardItem)}
           />
         </div>

@@ -110,6 +110,7 @@ const RestartGamePage = () => {
     <div className={cx('restart-container', 'd-flex')}>
       <Col
         sm={8}
+        xs={6}
         className={cx('flip-card-container', 'vh-100')}
       >
         <div className={cx('greeting', 'd-flex flex-column')}>
@@ -128,7 +129,7 @@ const RestartGamePage = () => {
                 {currentCard && (
                   <img
                     src={currentCard?.cards[0].image}
-                    alt='Avatar'
+                    alt='front-card'
                     width={300}
                     height={355}
                   />
@@ -137,7 +138,7 @@ const RestartGamePage = () => {
               <div className={cx('flip-card-back')}>
                 <img
                   src={cardBack}
-                  alt='Avatar'
+                  alt='back-card'
                   width={300}
                   height={379}
                 />
@@ -157,6 +158,7 @@ const RestartGamePage = () => {
       </Col>
       <Col
         sm={4}
+        xs={6}
         className={cx('flip-card-recent')}
       >
         <div className={cx('flip-card-recent-list', 'd-flex flex-column')}>
