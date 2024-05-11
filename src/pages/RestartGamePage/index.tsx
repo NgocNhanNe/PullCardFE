@@ -53,6 +53,12 @@ const RestartGamePage = () => {
       .get(`https://deckofcardsapi.com/api/deck/${cardDeck?.deck_id}/draw/?count=1`)
       .then(res => {
         if (res.status === 200) {
+          if (!res.data.success) {
+            alert(
+              'The number of cards has run out, please click Restart Game to play again!'
+            );
+            return;
+          }
           localStorage.setItem('cardSelected', JSON.stringify(res.data));
           setCurrentCard(res.data);
 
@@ -98,6 +104,7 @@ const RestartGamePage = () => {
 
   console.log('current', currentCard);
   console.log('last', lastCards);
+  console.log('remain', currentCard?.remaining);
 
   return (
     <div className={cx('restart-container', 'd-flex')}>
