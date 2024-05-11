@@ -1,4 +1,3 @@
-import * as React from 'react';
 import { menuList } from './menu';
 import className from 'classnames/bind';
 import styles from './Sidebar.module.scss';
@@ -6,13 +5,18 @@ import logo from '../../../assets/images/logo.png';
 import { Row } from 'reactstrap';
 import { Link } from 'react-router-dom';
 import AccountProfile from 'components/AccountProfile';
+import { useContext } from 'react';
+import { CardSelectedContext, LastCardsContext } from 'contexts';
 
 const cx = className.bind(styles);
 
 const Sidebar = () => {
+  const { setCardSelected } = useContext(CardSelectedContext);
+  const { setLastCards } = useContext(LastCardsContext);
+
   return (
     <div
-      style={{ borderRight: '1px solid #eee', width: '250px' }}
+      style={{ borderRight: '1px solid #eee' }}
       className='d-flex align-items-center justity-content-center flex-column vh-100'
     >
       <Row style={{ padding: '65px 45px' }}>
@@ -43,6 +47,12 @@ const Sidebar = () => {
               <Link
                 to={item.path}
                 className='text-light'
+                onClick={() => {
+                  setCardSelected(null);
+                  setLastCards([]);
+
+                  localStorage.clear();
+                }}
               >
                 {item.title}
               </Link>
@@ -50,8 +60,10 @@ const Sidebar = () => {
           </div>
         </Row>
       ))}
-      <div className={cx('profile')}>
-        <AccountProfile />
+      <div className={cx('profile-container')}>
+        <div className={cx('profile')}>
+          <AccountProfile />
+        </div>
       </div>
     </div>
   );

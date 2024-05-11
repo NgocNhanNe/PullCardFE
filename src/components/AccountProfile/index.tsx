@@ -1,12 +1,16 @@
 /* eslint-disable jsx-a11y/img-redundant-alt */
+import { CurrentAccountContext } from 'contexts';
 import profileIcon from '../../assets/images/logo.png';
 import style from './AccountProfile.module.scss';
 
 import classNames from 'classnames/bind';
+import { useContext } from 'react';
 
 const cx = classNames.bind(style);
 
 const AccountProfile = () => {
+  const currentAccount = useContext(CurrentAccountContext);
+
   return (
     <div className='d-flex justify-content-center align-items-center'>
       <div
@@ -21,8 +25,8 @@ const AccountProfile = () => {
           alt='profile image'
         />
         <div className={cx('profile-infor')}>
-          <p className={cx('name')}>Ngoc nhan</p>
-          <p className={cx('role')}>Free account</p>
+          <p className={cx('name')}>{currentAccount?.name}</p>
+          <p className={cx('role')}>{currentAccount?.role}</p>
         </div>
       </div>
     </div>

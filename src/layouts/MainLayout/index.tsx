@@ -12,7 +12,7 @@ type MainLayoutProps = {
 const MainLayout = ({ children }: MainLayoutProps) => {
   return (
     <div className='d-flex w-100'>
-      <div>
+      <div className={cx('sidebar-container')}>
         <Sidebar />
       </div>
       <div className={cx('content')}>{children}</div>

@@ -4,7 +4,7 @@
     height: 45px;
     border: 1px solid gray;
     border-radius: 999px;
-    margin-right: 10px;
+    margin-right: 20px;
   }
 
   & .profile-infor {
@@ -19,6 +19,7 @@
       font-size: 13px;
       font-family: 'Inter';
       font-weight: 600;
+      margin-bottom: 0;
     }
   }
 }
