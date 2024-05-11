@@ -28,7 +28,7 @@ const CardItemRecent = ({ cardItem, onCardItemClick }: CardItemRecentProps) => {
       />
       <div className={cx('card-infor')}>
         <div className='d-flex justify-content-between align-items-center'>
-          <p className={cx('name')}>{cardItem.cards[0].code}</p>
+          <p className={cx('name')}>{cardItem.cards[0]?.code}</p>
           <MdOutlineNavigateNext
             size={25}
             onClick={() => onCardItemClick(cardItem)}
