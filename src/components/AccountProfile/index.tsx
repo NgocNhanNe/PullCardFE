@@ -3,7 +3,6 @@ import classNames from 'classnames/bind';
 import { useContext } from 'react';
 
 import styles from './AccountProfile.module.scss';
-import avatarImg from '../../assets/images/avatar.png';
 import { handleTitleCase } from 'utils';
 import { CurrentAccountContext } from 'contexts';
 
@@ -21,7 +20,7 @@ const AccountProfile = () => {
       >
         <img
           className={cx('profile-image')}
-          src={avatarImg}
+          src={currentAccount?.avatar}
           alt='profile image'
         />
         <div className={cx('profile-infor')}>

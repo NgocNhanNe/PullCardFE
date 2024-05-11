@@ -23,7 +23,7 @@ const CardItemRecent = ({ cardItem, onCardItemClick }: CardItemRecentProps) => {
     >
       <img
         className={cx('card-image')}
-        src={cardItem.cards[0].image}
+        src={cardItem.cards[0]?.image}
         alt='profile image'
       />
       <div className={cx('card-infor')}>

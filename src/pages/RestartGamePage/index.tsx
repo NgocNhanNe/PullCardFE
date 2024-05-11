@@ -96,6 +96,9 @@ const RestartGamePage = () => {
     setCurrentCard(cardItemSelected);
   };
 
+  console.log('current', currentCard);
+  console.log('last', lastCards);
+
   return (
     <div className={cx('restart-container', 'd-flex')}>
       <Col
@@ -118,7 +121,7 @@ const RestartGamePage = () => {
               <div className={cx('flip-card-front')}>
                 {currentCard && (
                   <img
-                    src={currentCard?.cards[0].image}
+                    src={currentCard?.cards[0]?.image}
                     alt='front-card'
                     width={300}
                     height={355}
@@ -138,6 +141,7 @@ const RestartGamePage = () => {
 
           <div>
             <button
+              disabled={loading}
               className={cx('choose-btn')}
               onClick={() => handleFlipCard()}
             >
@@ -162,9 +166,9 @@ const RestartGamePage = () => {
           </div>
 
           {lastCards.length > 0 ? (
-            lastCards.map(lastCard => (
+            lastCards.map((lastCard, index) => (
               <CardItemRecent
-                key={lastCard.timestamp}
+                key={index}
                 cardItem={lastCard}
                 onCardItemClick={handleCardItemClick}
               />
