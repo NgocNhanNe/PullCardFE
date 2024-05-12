@@ -1,11 +1,11 @@
 /* eslint-disable jsx-a11y/img-redundant-alt */
 import classNames from 'classnames/bind';
+
 import style from './CardItemRecent.module.scss';
 import { CardResponse } from 'types/CardResponse.type';
 import { MdOutlineNavigateNext } from 'react-icons/md';
 
 const cx = classNames.bind(style);
-
 type CardItemRecentProps = {
   cardItem: CardResponse;
   onCardItemClick: (cardItemSelected: CardResponse) => void;
@@ -26,13 +26,13 @@ const CardItemRecent = ({ cardItem, onCardItemClick }: CardItemRecentProps) => {
         src={cardItem.cards[0]?.image}
         alt='profile image'
       />
-      <div className={cx('card-infor')}>
+      <div
+        className={cx('card-infor')}
+        onClick={() => onCardItemClick(cardItem)}
+      >
         <div className='d-flex justify-content-between align-items-center'>
           <p className={cx('name')}>{cardItem.cards[0]?.code}</p>
-          <MdOutlineNavigateNext
-            size={25}
-            onClick={() => onCardItemClick(cardItem)}
-          />
+          <MdOutlineNavigateNext size={25} />
         </div>
         <p className={cx('role')}>{cardItem.timestamp}</p>
       </div>

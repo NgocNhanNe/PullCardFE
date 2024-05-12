@@ -1,9 +1,11 @@
 import 'bootstrap-scss/bootstrap.scss';
-import { useState } from 'react';
+import axios from 'axios';
+import { useEffect, useState } from 'react';
 import { Route, Routes } from 'react-router-dom';
 
+import { CardDeck } from 'types/CardDeck.type';
 import { RouteType, privateRoutes } from './routes';
-import { CardSelectedContext, LastCardsContext } from 'contexts';
+import { CardDeckContext, CardSelectedContext, LastCardsContext } from 'contexts';
 
 const getRoutes = (routes: RouteType[]) => {
   return routes.map(route => {
@@ -33,10 +35,27 @@ const App = () => {
     return [];
   });
 
+  const [cardDeck, setCardDeck] = useState<CardDeck | null>(null);
+
+  useEffect(() => {
+    axios
+      .get('https://deckofcardsapi.com/api/deck/new/shuffle/?deck_count=1')
+      .then(res => {
+        if (res.status === 200) {
+          setCardDeck(res.data);
+        }
+      })
+      .catch(err => {
+        console.log(err);
+      });
+  }, []);
+
   return (
     <CardSelectedContext.Provider value={{ cardSelected, setCardSelected }}>
       <LastCardsContext.Provider value={{ lastCards, setLastCards }}>
-        <Routes>{getRoutes(privateRoutes)}</Routes>
+        <CardDeckContext.Provider value={{ cardDeck, setCardDeck }}>
+          <Routes>{getRoutes(privateRoutes)}</Routes>
+        </CardDeckContext.Provider>
       </LastCardsContext.Provider>
     </CardSelectedContext.Provider>
   );

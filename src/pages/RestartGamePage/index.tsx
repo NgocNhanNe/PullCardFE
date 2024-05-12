@@ -7,10 +7,14 @@ import style from './RestartGamePage.module.scss';
 import cardBack from '../../assets/images/cardBack.png';
 import CardItemRecent from './CardItemRecent';
 import NoLastCardResponse from 'components/NoLastCardResponse';
-import { CardDeck } from 'types/CardDeck.type';
 import { CardResponse } from 'types/CardResponse.type';
 import { handleTitleCase } from 'utils';
-import { CardSelectedContext, CurrentAccountContext, LastCardsContext } from 'contexts';
+import {
+  CardDeckContext,
+  CardSelectedContext,
+  CurrentAccountContext,
+  LastCardsContext
+} from 'contexts';
 
 const cx = classNames.bind(style);
 
@@ -20,26 +24,9 @@ const RestartGamePage = () => {
   const { cardSelected: currentCard, setCardSelected: setCurrentCard } =
     useContext(CardSelectedContext);
   const [loading, setLoading] = useState(false);
-  const [cardDeck, setCardDeck] = useState<CardDeck | null>(null);
+  const { cardDeck } = useContext(CardDeckContext);
 
   const innerCardRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    setLoading(true);
-    axios
-      .get('https://deckofcardsapi.com/api/deck/new/shuffle/?deck_count=1')
-      .then(res => {
-        if (res.status === 200) {
-          setCardDeck(res.data);
-        }
-      })
-      .catch(err => {
-        console.log(err);
-      })
-      .finally(() => {
-        setLoading(false);
-      });
-  }, []);
 
   useEffect(() => {
     if (innerCardRef) {
@@ -57,6 +44,7 @@ const RestartGamePage = () => {
             alert(
               'The number of cards has run out, please click Restart Game to play again!'
             );
+
             return;
           }
           localStorage.setItem('cardSelected', JSON.stringify(res.data));
@@ -72,21 +60,17 @@ const RestartGamePage = () => {
             if (isCurrentCardExist) return;
           }
 
-          const lastCardsClone = [...lastCards];
+          const updatedLastCards = [
+            { ...currentCard, timestamp: new Date().toLocaleString() },
+            ...lastCards
+          ];
 
-          if (lastCardsClone.length === 5) {
-            lastCardsClone.splice(0, 1);
+          if (updatedLastCards.length > 5) {
+            updatedLastCards.splice(5);
           }
 
-          const currentCardWithTimestamp = { ...currentCard };
-          currentCardWithTimestamp.timestamp = new Date(Date.now()).toLocaleString();
-
-          localStorage.setItem(
-            'lastCards',
-            JSON.stringify([...lastCardsClone, currentCardWithTimestamp])
-          );
-
-          setLastCards([...lastCardsClone, currentCardWithTimestamp]);
+          localStorage.setItem('lastCards', JSON.stringify(updatedLastCards));
+          setLastCards(updatedLastCards);
         }
       })
       .catch(err => {
@@ -98,9 +82,27 @@ const RestartGamePage = () => {
   };
 
   const handleCardItemClick = (cardItemSelected: CardResponse) => {
+    const previousSelectedCard = currentCard;
+
     localStorage.setItem('cardSelected', JSON.stringify(cardItemSelected));
     setCurrentCard(cardItemSelected);
+
+    if (previousSelectedCard) {
+      const updatedLastCards = [
+        { ...previousSelectedCard, timestamp: new Date().toLocaleString() },
+        ...lastCards
+      ];
+
+      if (updatedLastCards.length > 5) {
+        updatedLastCards.splice(5);
+      }
+
+      localStorage.setItem('lastCards', JSON.stringify(updatedLastCards));
+      setLastCards(updatedLastCards);
+    }
   };
+
+  console.log(currentCard?.remaining);
 
   return (
     <div className={cx('restart-container', 'd-flex')}>
@@ -121,7 +123,14 @@ const RestartGamePage = () => {
               className={cx('flip-card-inner')}
               ref={innerCardRef}
             >
-              <div className={cx('flip-card-front')}>
+              <div
+                className={cx(
+                  {
+                    'bg-front-card': currentCard?.remaining! !== 0
+                  },
+                  'flip-card-front'
+                )}
+              >
                 {currentCard && (
                   <img
                     src={currentCard?.cards[0]?.image}

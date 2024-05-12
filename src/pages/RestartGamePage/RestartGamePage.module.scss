@@ -55,11 +55,14 @@
     }
 
     .flip-card-front {
+      transform: rotateY(180deg);
+    }
+
+    .bg-front-card {
       background: url('../../assets/images/cardBack.png');
       background-repeat: no-repeat;
       background-size: cover;
       color: white;
-      transform: rotateY(180deg);
     }
 
     .flip-card-back {

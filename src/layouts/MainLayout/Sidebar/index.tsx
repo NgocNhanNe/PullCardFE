@@ -1,3 +1,4 @@
+import axios from 'axios';
 import className from 'classnames/bind';
 import { Row } from 'reactstrap';
 import { Link } from 'react-router-dom';
@@ -7,12 +8,13 @@ import logo from '../../../assets/images/logo.png';
 import styles from './Sidebar.module.scss';
 import AccountProfile from 'components/AccountProfile';
 import { menuList } from './menu';
-import { CardSelectedContext, LastCardsContext } from 'contexts';
+import { CardDeckContext, CardSelectedContext, LastCardsContext } from 'contexts';
 
 const cx = className.bind(styles);
 const Sidebar = () => {
   const { setLastCards } = useContext(LastCardsContext);
   const { setCardSelected } = useContext(CardSelectedContext);
+  const { setCardDeck } = useContext(CardDeckContext);
 
   return (
     <div
@@ -42,9 +44,18 @@ const Sidebar = () => {
               'd-flex justify-content-center align-items-center '
             )}
             onClick={() => {
+              axios
+                .get('https://deckofcardsapi.com/api/deck/new/shuffle/?deck_count=1')
+                .then(res => {
+                  if (res.status === 200) {
+                    setCardDeck(res.data);
+                  }
+                })
+                .catch(err => {
+                  console.log(err);
+                });
               setCardSelected(null);
               setLastCards([]);
-
               localStorage.clear();
             }}
           >

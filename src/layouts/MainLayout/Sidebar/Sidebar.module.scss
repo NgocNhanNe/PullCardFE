@@ -21,7 +21,7 @@
 }
 
 .profile-container {
-  width: 16.6%;
+  width: 15%;
   height: 100px;
   position: absolute;
   bottom: 3.3%;
@@ -51,6 +51,10 @@
     & img {
       display: none;
     }
+  }
+
+  .profile-container {
+    width: 18%;
   }
 }
 
