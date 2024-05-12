@@ -133,6 +133,7 @@ const RestartGamePage = () => {
               >
                 {currentCard && (
                   <img
+                    id={currentCard?.cards[0].code}
                     src={currentCard?.cards[0]?.image}
                     alt='front-card'
                     width={300}
@@ -180,7 +181,7 @@ const RestartGamePage = () => {
           {lastCards.length > 0 ? (
             lastCards.map((lastCard, index) => (
               <CardItemRecent
-                key={index}
+                key={index + lastCard.timestamp}
                 cardItem={lastCard}
                 onCardItemClick={handleCardItemClick}
               />
