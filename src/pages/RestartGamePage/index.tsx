@@ -93,6 +93,14 @@ const RestartGamePage = () => {
         ...lastCards
       ];
 
+      if (lastCards.length > 0) {
+        const isCurrentCardExist = lastCards.find(
+          item => item.timestamp === currentCard.timestamp
+        );
+
+        if (isCurrentCardExist) return;
+      }
+
       if (updatedLastCards.length > 5) {
         updatedLastCards.splice(5);
       }
