@@ -18,6 +18,29 @@ import {
 
 const cx = classNames.bind(style);
 
+const updateLastCards = (
+  currentCard: CardResponse,
+  lastCards: CardResponse[]
+): CardResponse[] => {
+  if (lastCards.length > 0) {
+    const isCurrentCardExist = lastCards.find(
+      item => item.timestamp === currentCard.timestamp
+    );
+    if (isCurrentCardExist) return [...lastCards];
+  }
+  // update timestamp for current card
+  const updatedLastCards = [
+    { ...currentCard, timestamp: new Date().toLocaleString() },
+    ...lastCards
+  ];
+
+  if (updatedLastCards.length > 5) {
+    updatedLastCards.splice(5);
+  }
+
+  return updatedLastCards;
+};
+
 const RestartGamePage = () => {
   const currentUser = useContext(CurrentAccountContext);
   const { lastCards, setLastCards } = useContext(LastCardsContext);
@@ -26,11 +49,11 @@ const RestartGamePage = () => {
   const [loading, setLoading] = useState(false);
   const { cardDeck } = useContext(CardDeckContext);
 
-  const innerCardRef = useRef<HTMLDivElement>(null);
+  const innerCardRef = useRef<HTMLDivElement>(document.createElement('div'));
 
   useEffect(() => {
     if (innerCardRef) {
-      (innerCardRef.current as any).style.transform = 'rotateY(180deg)';
+      innerCardRef.current.style.transform = 'rotateY(180deg)';
     }
   }, [currentCard]);
 
@@ -44,7 +67,6 @@ const RestartGamePage = () => {
             alert(
               'The number of cards has run out, please click Restart Game to play again!'
             );
-
             return;
           }
           localStorage.setItem('cardSelected', JSON.stringify(res.data));
@@ -52,22 +74,7 @@ const RestartGamePage = () => {
 
           if (!currentCard) return;
 
-          if (lastCards.length > 0) {
-            const isCurrentCardExist = lastCards.find(
-              item => item.timestamp === currentCard.timestamp
-            );
-
-            if (isCurrentCardExist) return;
-          }
-
-          const updatedLastCards = [
-            { ...currentCard, timestamp: new Date().toLocaleString() },
-            ...lastCards
-          ];
-
-          if (updatedLastCards.length > 5) {
-            updatedLastCards.splice(5);
-          }
+          const updatedLastCards = updateLastCards(currentCard, lastCards);
 
           localStorage.setItem('lastCards', JSON.stringify(updatedLastCards));
           setLastCards(updatedLastCards);
@@ -82,35 +89,16 @@ const RestartGamePage = () => {
   };
 
   const handleCardItemClick = (cardItemSelected: CardResponse) => {
-    const previousSelectedCard = currentCard;
-
     localStorage.setItem('cardSelected', JSON.stringify(cardItemSelected));
     setCurrentCard(cardItemSelected);
 
-    if (previousSelectedCard) {
-      const updatedLastCards = [
-        { ...previousSelectedCard, timestamp: new Date().toLocaleString() },
-        ...lastCards
-      ];
-
-      if (lastCards.length > 0) {
-        const isCurrentCardExist = lastCards.find(
-          item => item.timestamp === currentCard.timestamp
-        );
-
-        if (isCurrentCardExist) return;
-      }
-
-      if (updatedLastCards.length > 5) {
-        updatedLastCards.splice(5);
-      }
+    if (currentCard) {
+      const updatedLastCards = updateLastCards(currentCard, lastCards);
 
       localStorage.setItem('lastCards', JSON.stringify(updatedLastCards));
       setLastCards(updatedLastCards);
     }
   };
-
-  console.log(currentCard?.remaining);
 
   return (
     <div className={cx('restart-container', 'd-flex')}>
